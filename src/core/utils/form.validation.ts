@@ -7,8 +7,7 @@ export function formValidation(user: UserModel): Record<string, string> {
   }
   if (!user.password) {
     errors.password = "Password is required";
-  }
-  if (user.password.length < 4) {
+  } else if (user.password.length < 4) {
     errors.password = "Password must be at least 5 characters";
   }
   return errors;
