@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from "react";
 import { tokenStorage } from "@/core/utils/local_storage";
 import { Language } from "@/core/utils/types";
-import { getLanguagesApi } from "@/features/languages/api/languages.api";
+import { getLanguagesAction } from "@/features/languages/actions/languages.action";
 
 interface Props {
   value: string;
@@ -18,7 +18,7 @@ const LanguageSelector: FC<Props> = ({ value, onChange }) => {
     const token = tokenStorage.get();
     if (!token) return;
 
-    getLanguagesApi(token)
+    getLanguagesAction(token)
       .then((list) => {
         setLanguages(list);
         if (!value && list.length > 0) onChange(list[0].code);

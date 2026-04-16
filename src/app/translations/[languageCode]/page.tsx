@@ -5,9 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import { tokenStorage } from "@/core/utils/local_storage";
 import { TranslationWithLanguage } from "@/core/utils/types";
 import {
-  getTranslationsByLanguageApi,
-  saveTranslationApi,
-} from "@/features/translations/api/translations.api";
+  getTranslationsByLanguageAction,
+  saveTranslationAction,
+} from "@/features/translations/actions/translations.action";
 import LanguageSelector from "@/features/languages/components/LanguageSelector";
 import TranslationsTable from "@/features/translations/components/TranslationsTable";
 import Pagination from "@/core/components/Pagination/Pagination";
@@ -35,11 +35,13 @@ export default function TranslationsPage() {
       router.push("/");
       return;
     }
+
     if (!selectedLang) return;
 
     setLoading(true);
     setEditValues({});
-    getTranslationsByLanguageApi(selectedLang, page, PAGE_SIZE, token)
+
+    getTranslationsByLanguageAction(selectedLang, page, PAGE_SIZE, token)
       .then((data) => {
         setTranslations(data.data);
         setTotalPages(data.totalPages);
@@ -61,11 +63,11 @@ export default function TranslationsPage() {
 
     setSaving(t.key);
     try {
-      const updated = await saveTranslationApi(
+      const updated = await saveTranslationAction(
         {
           key: t.key,
           language_code: selectedLang,
-          translated_value: editValues[t.key] ?? t.translated_value,
+          translated_value: editValues[t.key] ?? t.translated_value ?? "",
         },
         token
       );
