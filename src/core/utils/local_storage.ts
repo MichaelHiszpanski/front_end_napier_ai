@@ -1,5 +1,7 @@
 "use client";
 
+export const AUTH_CHANGE_EVENT = "auth:change";
+
 export const tokenStorage = {
   get: () => {
     if (typeof window === "undefined") return null;
@@ -8,9 +10,11 @@ export const tokenStorage = {
   set: (token: string) => {
     if (typeof window === "undefined") return;
     localStorage.setItem("token", token);
+    window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
   },
   remove: () => {
     if (typeof window === "undefined") return;
     localStorage.removeItem("token");
+    window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
   },
 };
