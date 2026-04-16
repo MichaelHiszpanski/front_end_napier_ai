@@ -14,7 +14,7 @@ export async function getTranslationsByLangFetch(
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        ...(token ? { Authorization: token } : {}),
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     }
   );

@@ -20,7 +20,7 @@ export async function getTranslationsFetch(
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        ...(token ? { Authorization: token } : {}),
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     }
   );
@@ -43,7 +43,7 @@ export async function saveTranslationFetch(
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      ...(token ? { Authorization: token } : {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
     body: JSON.stringify(body),
   });

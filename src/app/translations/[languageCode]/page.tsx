@@ -43,7 +43,7 @@ export default function TranslationsPage() {
       .then((data) => {
         setTranslations(data.data);
         setTotalPages(data.totalPages);
-        setPage((p) => Math.min(p, data.totalPages));
+        if (page > data.totalPages) setPage(data.totalPages);
         setError(null);
       })
       .catch((err) => setError((err as Error).message))
@@ -52,6 +52,7 @@ export default function TranslationsPage() {
 
   function handleLangChange(code: string) {
     setSelectedLang(code);
+    window.history.replaceState(null, "", `/translations/${code}`);
   }
 
   async function handleSave(t: TranslationWithLanguage) {
