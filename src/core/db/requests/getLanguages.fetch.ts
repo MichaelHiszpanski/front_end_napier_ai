@@ -1,5 +1,7 @@
+import { API_URL } from "../db.config";
+
 export async function getLanguagesFetch(token?: string) {
-  const res = await fetch(`${process.env.API_URL}/languages`, {
+  const res = await fetch(`${API_URL}/languages`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

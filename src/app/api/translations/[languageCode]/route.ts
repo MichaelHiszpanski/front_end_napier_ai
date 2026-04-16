@@ -1,4 +1,4 @@
-import { getTranslationsByLanguageFetch } from "@/core/db/requests/getTranslationsByLanguage.fetch";
+import { getTranslationsByLangFetch } from "@/core/db/requests/getTranslationsByLang.fetch";
 
 export async function GET(
   request: Request,
@@ -10,7 +10,7 @@ export async function GET(
   const page = searchParams.get("page") ?? "1";
   const limit = searchParams.get("limit") ?? "20";
 
-  const { ok, status, data } = await getTranslationsByLanguageFetch(
+  const { ok, status, data } = await getTranslationsByLangFetch(
     languageCode,
     page,
     limit,

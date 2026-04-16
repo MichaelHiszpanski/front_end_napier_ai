@@ -1,7 +1,7 @@
 import { API_URL } from "../db.config";
 import { PaginatedResponse, TranslationWithLanguage } from "@/core/utils/types";
 
-export async function getTranslationsByLanguageFetch(
+export async function getTranslationsByLangFetch(
   languageCode: string,
   page: string = "1",
   limit: string = "20",

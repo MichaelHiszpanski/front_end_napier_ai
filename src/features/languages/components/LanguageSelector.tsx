@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { tokenStorage } from "@/core/utils/local_storage";
 import { Language } from "@/core/utils/types";
 import { getLanguagesApi } from "@/features/languages/api/languages.api";
 
-type Props = {
+interface Props {
   value: string;
   onChange: (code: string) => void;
-};
+}
 
-export default function LanguageSelector({ value, onChange }: Props) {
+const LanguageSelector: FC<Props> = ({ value, onChange }) => {
   const [languages, setLanguages] = useState<Language[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +31,7 @@ export default function LanguageSelector({ value, onChange }: Props) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       disabled={loading}
-      className="rounded-xl border border-cyan-600 p-2 px-4 text-black dark:text-white dark:bg-zinc-800 bg-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-600 text-sm"
+      className="rounded-xl border border-cyan-600 p-2 px-6 text-black dark:text-white dark:bg-zinc-800 bg-white disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-600 text-sm"
     >
       {loading ? (
         <option>Loading…</option>
@@ -44,4 +44,5 @@ export default function LanguageSelector({ value, onChange }: Props) {
       )}
     </select>
   );
-}
+};
+export default LanguageSelector;

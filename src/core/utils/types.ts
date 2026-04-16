@@ -27,8 +27,10 @@ export type PaginatedResponse<T> = {
 export type TranslationsResponse = PaginatedResponse<TranslationKey>;
 
 export type Language = {
+  id: number;
   code: string;
   name: string;
+  is_active: boolean;
 };
 
 export type SaveTranslationRequest = {

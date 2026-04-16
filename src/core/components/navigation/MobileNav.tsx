@@ -10,6 +10,7 @@ interface MobileNavProps {
   pathname: string;
   handleSignOut: () => void;
 }
+
 const MobileNav: FC<MobileNavProps> = ({
   open,
   setOpen,
@@ -27,7 +28,11 @@ const MobileNav: FC<MobileNavProps> = ({
               href={l.href}
               onClick={() => setOpen(false)}
               className={`text-sm ${
-                (l.href === "/" ? pathname === "/" : pathname.startsWith(l.href))
+                (
+                  l.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(l.href)
+                )
                   ? "text-cyan-600 font-medium"
                   : "text-zinc-500"
               }`}
