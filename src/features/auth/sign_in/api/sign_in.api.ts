@@ -1,5 +1,6 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3030";
+
 export async function singInUserApi(username: string, password: string) {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3030";
   try {
     const res = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
@@ -14,9 +15,9 @@ export async function singInUserApi(username: string, password: string) {
       if (res.status === 400) throw new Error("Missing fields");
       throw new Error("Login failed");
     }
+
     return await res.json();
   } catch (error) {
-    console.error("Error during login:", error);
-    throw error;
+    throw new Error("Login failed", { cause: error });
   }
 }

@@ -1,5 +1,6 @@
 import { FormState } from "@/core/utils/types";
 import { singInUserApi } from "../api/sign_in.api";
+import { formValidation } from "@/core/utils/form.validation";
 
 export async function singInUserAction(
   _prevState: FormState,
@@ -7,12 +8,14 @@ export async function singInUserAction(
 ): Promise<FormState> {
   const username = formData.get("username") as string;
   const password = formData.get("password") as string;
+  const validation = formValidation({ username, password });
 
-  if (!username) {
-    return { message: false, error: null, fieldErrors: { username: "Username is required" } };
-  }
-  if (!password) {
-    return { message: false, error: null, fieldErrors: { password: "Password is required" } };
+  if (Object.keys(validation).length > 0) {
+    return {
+      message: false,
+      error: "Validation failed",
+      fieldErrors: validation,
+    };
   }
 
   try {
