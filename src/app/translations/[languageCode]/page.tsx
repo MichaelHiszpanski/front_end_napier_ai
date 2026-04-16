@@ -104,7 +104,7 @@ export default function TranslationsPage() {
         {error && <p className="text-sm text-red-500">{error}</p>}
 
         {loading ? (
-          <div className="text-sm text-zinc-400">Loading…</div>
+          <h2 className="text-sm text-zinc-400">Loading…</h2>
         ) : (
           <>
             <TranslationsTable
