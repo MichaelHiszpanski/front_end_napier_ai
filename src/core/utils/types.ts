@@ -43,9 +43,11 @@ export type TranslationWithLanguage = {
   id: number;
   key: string;
   english_value: string;
-  translated_value: string;
+  translated_value: string | null;
   language_code: string;
   language_name: string;
+  created_at?: string;
+  updated_at?: string;
 };
 
 export type FormState = {
