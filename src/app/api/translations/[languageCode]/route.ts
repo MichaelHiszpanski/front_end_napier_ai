@@ -1,4 +1,4 @@
-import { getTranslationsByLangFetch } from "@/core/db/requests/getTranslationsByLang.fetch";
+import { getTranslationsByLangFetch } from "@/core/db/requests/translationsByLang.fetch";
 
 export async function GET(
   request: Request,

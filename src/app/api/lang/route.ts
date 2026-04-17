@@ -1,4 +1,4 @@
-import { getLanguagesFetch } from "@/core/db/requests/getLanguages.fetch";
+import { getLanguagesFetch } from "@/core/db/requests/languages.fetch";
 
 export async function GET(request: Request) {
   const token = request.headers.get("Authorization") ?? undefined;
