@@ -67,7 +67,7 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
                     }))
                   }
                 />
-                {(editValues[t.key] ?? t.translated_value) && isDirty && (
+                {isDirty && (
                   <button
                     onClick={() => handleSave(t)}
                     disabled={saving === t.key}
