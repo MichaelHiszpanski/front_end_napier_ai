@@ -28,8 +28,9 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
             English
           </th>
           <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
-            Translation
+            Description
           </th>
+
           <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide">
             Created
           </th>
@@ -41,7 +42,7 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
       </thead>
       <tbody>
         {translations.map((t, i) => {
-          const isDirty = editValues[t.key] !== undefined;
+          const isDirty: boolean = editValues[t.key] !== undefined;
           return (
             <tr
               key={t.id}
@@ -55,9 +56,9 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
               <td className="px-4 py-3 text-zinc-700 dark:text-zinc-300">
                 {t.english_value}
               </td>
-              <td className="px-4 py-2">
+              <td className="px-4 py-2 flex flex-row gap-2">
                 <input
-                  className="w-full rounded-lg border border-transparent focus:border-cyan-600 bg-transparent px-2 py-1 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:bg-white dark:focus:bg-zinc-800 transition-colors"
+                  className="w-full rounded-lg border  border-transparent focus:border-cyan-600 bg-transparent px-2 py-1 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:bg-white dark:focus:bg-zinc-800 transition-colors"
                   value={editValues[t.key] ?? t.translated_value ?? ""}
                   onChange={(e) =>
                     setEditValues((prev) => ({
@@ -66,23 +67,22 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
                     }))
                   }
                 />
+                {(editValues[t.key] ?? t.translated_value) && isDirty && (
+                  <button
+                    onClick={() => handleSave(t)}
+                    disabled={saving === t.key}
+                    className="text-xs text-cyan-600 border border-cyan-600 rounded-lg px-2 hover:bg-cyan-600 hover:text-white transition-colors disabled:opacity-40"
+                  >
+                    {saving === t.key ? "…" : "Save"}
+                  </button>
+                )}
               </td>
+
               <td className="px-4 py-3 text-xs text-zinc-400 whitespace-nowrap">
                 {formatDate(t.created_at)}
               </td>
               <td className="px-4 py-3 text-xs text-zinc-400 whitespace-nowrap">
                 {formatDate(t.updated_at)}
-              </td>
-              <td className="px-4 py-2 text-right">
-                {isDirty && (
-                  <button
-                    onClick={() => handleSave(t)}
-                    disabled={saving === t.key}
-                    className="text-xs text-cyan-600 border border-cyan-600 rounded-lg px-2 py-1 hover:bg-cyan-600 hover:text-white transition-colors disabled:opacity-40"
-                  >
-                    {saving === t.key ? "…" : "Save"}
-                  </button>
-                )}
               </td>
             </tr>
           );

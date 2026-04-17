@@ -1,3 +1,4 @@
+"use client";
 import LanguageSelector from "@/features/languages/components/LanguageSelector";
 import TranslationsTable from "@/features/translations/components/TranslationsTable";
 import Pagination from "@/core/components/Pagination/Pagination";

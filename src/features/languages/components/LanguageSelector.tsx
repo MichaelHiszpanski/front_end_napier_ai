@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState, useTransition } from "react";
-import { tokenStorage } from "@/core/utils/local_storage";
+import { handleUnauthorized, tokenStorage } from "@/core/utils/local_storage";
 import { Language } from "@/core/utils/types";
 import { getLanguagesAction } from "@/features/languages/actions/languages.action";
 
@@ -19,9 +19,13 @@ const LanguageSelector: FC<Props> = ({ value, onChange }) => {
     if (!token) return;
 
     startTransition(async () => {
-      const list = await getLanguagesAction(token);
-      setLanguages(list);
-      if (!value && list.length > 0) onChange(list[0].code);
+      try {
+        const list = await getLanguagesAction(token);
+        setLanguages(list);
+        if (!value && list.length > 0) onChange(list[0].code);
+      } catch (err) {
+        if ((err as Error).message === "Unauthorized") handleUnauthorized();
+      }
     });
   }, []);
 

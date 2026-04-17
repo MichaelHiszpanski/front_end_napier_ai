@@ -2,6 +2,12 @@
 
 export const AUTH_CHANGE_EVENT = "auth:change";
 
+export function handleUnauthorized() {
+  localStorage.removeItem("token");
+  window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
+  window.location.href = "/";
+}
+
 export const tokenStorage = {
   get: () => {
     if (typeof window === "undefined") return null;

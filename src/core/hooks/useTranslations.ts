@@ -1,7 +1,6 @@
-"use client";
 import { useEffect, useState, useTransition } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { tokenStorage } from "@/core/utils/local_storage";
+import { handleUnauthorized, tokenStorage } from "@/core/utils/local_storage";
 import { TranslationWithLanguage } from "@/core/utils/types";
 import {
   getTranslationsByLanguageAction,
@@ -49,7 +48,9 @@ export function useTranslations() {
         if (page > data.totalPages) setPage(data.totalPages);
         setError(null);
       } catch (err) {
-        setError((err as Error).message);
+        const msg = (err as Error).message;
+        if (msg === "Unauthorized") return handleUnauthorized();
+        setError(msg);
       }
     });
   }, [selectedLang, page, router]);
@@ -83,7 +84,9 @@ export function useTranslations() {
           return next;
         });
       } catch (err) {
-        setError((err as Error).message);
+        const msg = (err as Error).message;
+        if (msg === "Unauthorized") return handleUnauthorized();
+        setError(msg);
       } finally {
         setSaving(null);
       }
