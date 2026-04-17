@@ -1,6 +1,7 @@
 import { formatDate } from "@/core/utils/helpers";
 import { TranslationWithLanguage } from "@/core/utils/types";
 import { Dispatch, FC, SetStateAction } from "react";
+import RowInput from "./RowInput";
 
 interface DekstopListTableProps {
   translations: TranslationWithLanguage[];
@@ -57,25 +58,14 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
                 {t.english_value}
               </td>
               <td className="px-4 py-2 flex flex-row gap-2">
-                <input
-                  className="w-full rounded-lg border  border-transparent focus:border-cyan-600 bg-transparent px-2 py-1 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:bg-white dark:focus:bg-zinc-800 transition-colors"
-                  value={editValues[t.key] ?? t.translated_value ?? ""}
-                  onChange={(e) =>
-                    setEditValues((prev) => ({
-                      ...prev,
-                      [t.key]: e.target.value,
-                    }))
-                  }
+                <RowInput
+                  t={t}
+                  editValues={editValues}
+                  setEditValues={setEditValues}
+                  saving={saving}
+                  handleSave={handleSave}
+                  isDirty={isDirty}
                 />
-                {isDirty && (
-                  <button
-                    onClick={() => handleSave(t)}
-                    disabled={saving === t.key}
-                    className="text-xs text-cyan-600 border border-cyan-600 rounded-lg px-2 hover:bg-cyan-600 hover:text-white transition-colors disabled:opacity-40"
-                  >
-                    {saving === t.key ? "…" : "Save"}
-                  </button>
-                )}
               </td>
 
               <td className="px-4 py-3 text-xs text-zinc-400 whitespace-nowrap">

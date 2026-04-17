@@ -1,6 +1,7 @@
 import { formatDate } from "@/core/utils/helpers";
 import { TranslationWithLanguage } from "@/core/utils/types";
 import { Dispatch, SetStateAction } from "react";
+import RowInput from "./RowInput";
 
 interface MobileListTableProps {
   translations: TranslationWithLanguage[];
@@ -31,19 +32,28 @@ const MobileListTable: React.FC<MobileListTableProps> = ({
             <p className="text-sm text-zinc-700 dark:text-zinc-300">
               {t.english_value}
             </p>
-            <input
-              className="w-full rounded-lg border border-transparent focus:border-cyan-600 bg-zinc-100 dark:bg-zinc-800 px-2 py-1.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-cyan-600 transition-colors"
+            {/* <input
+              className="w-full rounded-lg border border-transparent bg-zinc-100 dark:bg-zinc-800 px-2 py-1.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-cyan-600 transition-colors"
               value={editValues[t.key] ?? t.translated_value ?? ""}
               onChange={(e) =>
                 setEditValues((prev) => ({ ...prev, [t.key]: e.target.value }))
               }
+              
+            /> */}
+            <RowInput
+              t={t}
+              editValues={editValues}
+              setEditValues={setEditValues}
+              saving={saving}
+              handleSave={handleSave}
+              isDirty={isDirty}
             />
             <div className="flex items-center justify-between gap-2">
               <div className="flex gap-3 text-xs text-zinc-400">
                 <span>Created: {formatDate(t.created_at)}</span>
                 <span>Updated: {formatDate(t.updated_at)}</span>
               </div>
-              {isDirty && (
+              {/* {isDirty && (
                 <button
                   onClick={() => handleSave(t)}
                   disabled={saving === t.key}
@@ -51,7 +61,7 @@ const MobileListTable: React.FC<MobileListTableProps> = ({
                 >
                   {saving === t.key ? "…" : "Save"}
                 </button>
-              )}
+              )} */}
             </div>
           </li>
         );
