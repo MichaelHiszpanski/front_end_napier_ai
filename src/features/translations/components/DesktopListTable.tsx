@@ -22,23 +22,23 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
     <table className="hidden md:table w-full text-sm">
       <thead>
         <tr className="border-b border-cyan-600/30 text-left">
-          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
+          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-min">
             Key
           </th>
-          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
-            Language
+          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-min">
+            Lang
           </th>
-          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
+          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/6">
             English
           </th>
-          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
+          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/3">
             Description
           </th>
 
-          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide">
+          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-min">
             Created
           </th>
-          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide">
+          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-min">
             Updated
           </th>
           <th className="px-4 py-3 w-16" />
@@ -57,13 +57,13 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
               <td className="px-4 py-3 font-mono text-xs text-zinc-500">
                 {t.key}
               </td>
-              <td className="px-4 py-3 font-mono text-xs text-zinc-500">
+              <td className="px-4 py-3 font-mono text-xs text-zinc-500 ">
                 {t.language_code}
               </td>
               <td className="px-4 py-3 text-zinc-700 dark:text-zinc-300">
                 {t.english_value}
               </td>
-              <td className="px-4 py-2 flex flex-row gap-2">
+              <td>
                 <RowInput
                   t={t}
                   editValues={editValues}

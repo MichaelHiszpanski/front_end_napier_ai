@@ -1,5 +1,6 @@
 import { TranslationWithLanguage } from "@/core/utils/types";
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
+import DetailsModal from "./DetailsModal";
 
 interface RowInputProps {
   t: TranslationWithLanguage;
@@ -9,6 +10,7 @@ interface RowInputProps {
   handleSave: (t: TranslationWithLanguage) => void;
   isDirty: boolean;
 }
+
 const RowInput: FC<RowInputProps> = ({
   t,
   editValues,
@@ -17,16 +19,16 @@ const RowInput: FC<RowInputProps> = ({
   handleSave,
   isDirty,
 }) => {
+  const [showDetails, setShowDetails] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-row items-center gap-2 lg:gap-4 lg:px-2">
       <input
-        className="w-full rounded-lg border  border-transparent focus:border-cyan-600 bg-transparent px-2 py-1 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:bg-white dark:focus:bg-zinc-800 transition-colors"
+        className="w-full rounded-lg border border-transparent focus:border-cyan-600 bg-transparent px-2 py-1 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:bg-white dark:focus:bg-zinc-800 transition-colors"
         value={editValues[t.key] ?? t.translated_value ?? ""}
         onChange={(e) =>
-          setEditValues((prev) => ({
-            ...prev,
-            [t.key]: e.target.value,
-          }))
+          setEditValues((prev) => ({ ...prev, [t.key]: e.target.value }))
         }
         onBlur={() => {
           if (editValues[t.key] === "") {
@@ -48,6 +50,20 @@ const RowInput: FC<RowInputProps> = ({
           {saving === t.key ? "…" : "Save"}
         </button>
       )}
+
+      <button
+        onClick={() => setShowDetails((prev) => !prev)}
+        className="border-cyan-600 border rounded-full cursor-pointer select-none px-1"
+      >
+        {showDetails ? "🙈" : "👀"}
+      </button>
+
+      <DetailsModal
+        showDetails={showDetails}
+        setShowDetails={setShowDetails}
+        t={t}
+        popoverRef={popoverRef}
+      />
     </div>
   );
 };
