@@ -1,21 +1,31 @@
 import { TranslationWithLanguage } from "@/core/utils/types";
-import { FC, Suspense } from "react";
+import { FC, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 interface DetailsModalProps {
   showDetails: boolean;
   setShowDetails: (show: boolean) => void;
   t: TranslationWithLanguage;
-  popoverRef: React.RefObject<HTMLDivElement | null>;
 }
 const DetailsModal: FC<DetailsModalProps> = ({
   setShowDetails,
   showDetails,
   t,
-  popoverRef,
 }) => {
+  useEffect(() => {
+    if (showDetails) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showDetails]);
+
+  if (!showDetails) return null;
   return (
-    <Suspense fallback={null}>
+    <>
       {showDetails &&
         createPortal(
           <div
@@ -23,9 +33,8 @@ const DetailsModal: FC<DetailsModalProps> = ({
             onClick={() => setShowDetails(false)}
           >
             <div
-              ref={popoverRef}
               onClick={(e) => e.stopPropagation()}
-              className="w-80 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-lg p-4"
+              className="min-w-64 max-w-lg max-h-[80vh] overflow-y-auto rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-lg p-4"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-medium text-zinc-500 uppercase tracking-wide">
@@ -48,7 +57,7 @@ const DetailsModal: FC<DetailsModalProps> = ({
           </div>,
           document.body
         )}
-    </Suspense>
+    </>
   );
 };
 

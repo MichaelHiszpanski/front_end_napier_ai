@@ -1,5 +1,5 @@
 import { TranslationWithLanguage } from "@/core/utils/types";
-import { Dispatch, FC, SetStateAction, useRef, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import DetailsModal from "./DetailsModal";
 
 interface RowInputProps {
@@ -20,7 +20,6 @@ const RowInput: FC<RowInputProps> = ({
   isDirty,
 }) => {
   const [showDetails, setShowDetails] = useState(false);
-  const popoverRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex flex-row items-center gap-2 lg:gap-4 lg:px-2">
@@ -62,7 +61,6 @@ const RowInput: FC<RowInputProps> = ({
         showDetails={showDetails}
         setShowDetails={setShowDetails}
         t={t}
-        popoverRef={popoverRef}
       />
     </div>
   );
