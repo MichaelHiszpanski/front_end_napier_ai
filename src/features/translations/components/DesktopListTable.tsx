@@ -26,6 +26,9 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
             Key
           </th>
           <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
+            Language
+          </th>
+          <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
             English
           </th>
           <th className="px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wide w-1/4">
@@ -53,6 +56,9 @@ const DekstopListTable: FC<DekstopListTableProps> = ({
             >
               <td className="px-4 py-3 font-mono text-xs text-zinc-500">
                 {t.key}
+              </td>
+              <td className="px-4 py-3 font-mono text-xs text-zinc-500">
+                {t.language_code}
               </td>
               <td className="px-4 py-3 text-zinc-700 dark:text-zinc-300">
                 {t.english_value}
