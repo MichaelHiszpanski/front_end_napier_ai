@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { links } from "./links";
 import { FC } from "react";
-import { useAuth } from "@/core/hooks/useAuth";
+import { useAuth } from "@/core/providers/AuthProvider";
 
 interface MobileNavProps {
   open: boolean;
@@ -17,7 +17,7 @@ const MobileNav: FC<MobileNavProps> = ({
   pathname,
   handleSignOut,
 }) => {
-  const isSignedIn = useAuth();
+  const { isSignedIn } = useAuth();
   return (
     <>
       {isSignedIn && open && (

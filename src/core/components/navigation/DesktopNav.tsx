@@ -3,7 +3,7 @@ import Link from "next/link";
 import { links } from "./links";
 import { usePathname } from "next/navigation";
 import { FC } from "react";
-import { useAuth } from "@/core/hooks/useAuth";
+import { useAuth } from "@/core/providers/AuthProvider";
 
 interface DekstopNavProps {
   handleSingOut: () => void;
@@ -11,7 +11,7 @@ interface DekstopNavProps {
 
 const DekstopNav: FC<DekstopNavProps> = ({ handleSingOut }) => {
   const pathname = usePathname();
-  const isSignedIn = useAuth();
+  const { isSignedIn } = useAuth();
   return (
     <div className="hidden sm:flex items-center gap-6">
       {isSignedIn && (

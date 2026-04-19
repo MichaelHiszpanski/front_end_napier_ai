@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useAuth } from "@/core/hooks/useAuth";
+
 import SignInClient from "@/features/auth/sign_in/components/SingInClinet";
+import { useAuth } from "@/core/providers/AuthProvider";
 
 export default function Home() {
-  const isSignedIn = useAuth();
+  const { isSignedIn } = useAuth();
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-center py-32 px-16 bg-white dark:bg-black gap-8">
