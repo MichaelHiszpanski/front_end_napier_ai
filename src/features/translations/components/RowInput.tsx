@@ -30,7 +30,9 @@ const RowInput: FC<RowInputProps> = ({
           setEditValues((prev) => ({ ...prev, [t.key]: e.target.value }))
         }
         onBlur={() => {
-          if (editValues[t.key] === "") {
+          const edited = editValues[t.key];
+          if (edited === undefined) return;
+          if (edited === "" || edited === (t.translated_value ?? "")) {
             setEditValues((prev) => {
               const next = { ...prev };
               delete next[t.key];
